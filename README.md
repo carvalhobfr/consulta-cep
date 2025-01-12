@@ -55,7 +55,7 @@ consulta-cep-app/
 │   ├── App.css
 │   ├── index.js
 │   └── index.css
-├── .env (caso criado)
+├── .env
 ├── package.json
 └── README.md
 ```
