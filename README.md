@@ -1,4 +1,3 @@
-Segue o conteúdo completo do arquivo `README.md`. Você pode copiar e colar este texto em um arquivo chamado `README.md` na raiz do seu projeto frontend:
 
 # Consulta CEP App - Frontend
 
