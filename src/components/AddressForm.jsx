@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-// import api from '../api'; // importa a instância do Axios se existir
+import api from '../api';  // Importa a instância configurada do Axios
 
 const initialState = {
   nome: '',
@@ -16,10 +16,37 @@ function AddressForm() {
   const [formData, setFormData] = useState(initialState);
   const [error, setError] = useState('');
 
-  const validarCPF = (cpf) => {
-    // Implementação simples de validação de CPF
-    return cpf.length === 11;
-  };
+  function validarCPF(cpf) {
+    // Remove caracteres não numéricos
+    cpf = cpf.replace(/\D/g, '');
+  
+    // Verifica se o CPF tem 11 dígitos
+    if (cpf.length !== 11) return false;
+  
+    // Verifica se todos os dígitos são iguais (CPFs inválidos)
+    if (/^(\d)\1+$/.test(cpf)) return false;
+  
+    // Cálculo do primeiro dígito verificador
+    let soma = 0;
+    for (let i = 0; i < 9; i++) {
+      soma += parseInt(cpf.charAt(i)) * (10 - i);
+    }
+    let resto = soma % 11;
+    let digito1 = (resto < 2) ? 0 : 11 - resto;
+    if (digito1 !== parseInt(cpf.charAt(9))) return false;
+  
+    // Cálculo do segundo dígito verificador
+    soma = 0;
+    for (let i = 0; i < 10; i++) {
+      soma += parseInt(cpf.charAt(i)) * (11 - i);
+    }
+    resto = soma % 11;
+    let digito2 = (resto < 2) ? 0 : 11 - resto;
+    if (digito2 !== parseInt(cpf.charAt(10))) return false;
+  
+    return true;
+  }
+  
 
   const handleCepBlur = async () => {
     if(formData.cep.length === 8) {
@@ -61,8 +88,8 @@ function AddressForm() {
     }
 
     try {
-      // Use api.post se configurou a instância do Axios
-      await axios.post('/api/usuarios', formData);
+      // Utiliza a instância configurada do Axios para enviar dados ao backend
+      await api.post('/api/usuarios', formData);
       setFormData(initialState);
       setError('');
       alert('Dados salvos com sucesso!');

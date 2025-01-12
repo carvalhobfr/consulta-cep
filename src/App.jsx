@@ -1,7 +1,7 @@
 import React from 'react';
 import AddressForm from './components/AddressForm';
 import AddressList from './components/AddressList';
-import './App.css';  // importa o CSS se existir
+import './App.css';
 
 function App() {
   return (
