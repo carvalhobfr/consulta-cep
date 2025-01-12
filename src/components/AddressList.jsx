@@ -1,6 +1,6 @@
 import React from 'react';
-import axios from 'axios';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import api from '../api';
 
 function AddressList() {
   const queryClient = useQueryClient();
@@ -32,7 +32,7 @@ function AddressList() {
     queryKey: ['usuarios'],
     queryFn: async () => {
       try {
-        const response = await axios.get('/api/usuarios');
+        const response = await api.get('/api/usuarios');
         return response.data;
       } catch (err) {
         console.error('Erro ao buscar usuários, usando dados mock.', err);
@@ -43,7 +43,7 @@ function AddressList() {
 
   const deleteMutation = useMutation({
     mutationFn: async (id) => {
-      await axios.delete(`/api/usuarios/${id}`);
+      await api.delete(`/api/usuarios/${id}`);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['usuarios'] });
