@@ -1,70 +1,103 @@
-# Getting Started with Create React App
+Segue o conteúdo completo do arquivo `README.md`. Você pode copiar e colar este texto em um arquivo chamado `README.md` na raiz do seu projeto frontend:
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Consulta CEP App - Frontend
 
-## Available Scripts
+Esta é a aplicação frontend da solução de Consulta de CEP e Gerenciamento de Endereços. Ela permite ao usuário inserir um CEP para buscar automaticamente o endereço usando a API ViaCEP, preencher dados pessoais (nome e CPF) e visualizar uma listagem de endereços salvos. A aplicação utiliza React, TanStack Query para gerenciamento de dados assíncronos e Axios para requisições HTTP.
 
-In the project directory, you can run:
+## Tecnologias Utilizadas
+
+- [React](https://reactjs.org/)
+- [TanStack Query (@tanstack/react-query)](https://tanstack.com/query/latest)
+- [Axios](https://axios-http.com/)
+- CSS para estilização
+
+## Instalação
+
+1. **Clone o repositório:**
+   ```bash
+   git clone <URL-DO-SEU-REPOSITORIO>
+   cd consulta-cep-app
+   ```
+
+2. **Instale as dependências:**
+   ```bash
+   npm install
+   ```
+
+## Configuração de Ambiente
+
+Crie um arquivo `.env` na raiz do projeto para definir variáveis de ambiente, se necessário. Por exemplo:
+```
+REACT_APP_API_URL=http://localhost:8080
+```
+Essa variável será usada para configurar a URL base da API backend no arquivo `src/api.js`.
+
+## Execução em Ambiente de Desenvolvimento
+
+Para iniciar a aplicação:
+```bash
+npm start
+```
+O servidor de desenvolvimento iniciará em [http://localhost:3000](http://localhost:3000).
+
+## Estrutura do Projeto
+
+```
+consulta-cep-app/
+├── public/
+│   └── index.html
+├── src/
+│   ├── components/
+│   │   ├── AddressForm.jsx
+│   │   └── AddressList.jsx
+│   ├── api.js
+│   ├── App.jsx
+│   ├── App.css
+│   ├── index.js
+│   └── index.css
+├── .env (caso criado)
+├── package.json
+└── README.md
+```
+
+- **src/components/AddressForm.jsx:**  
+  Formulário para entrada de CEP, nome, CPF. Busca automaticamente os dados do endereço via API ViaCEP e envia para o backend.
+
+- **src/components/AddressList.jsx:**  
+  Lista de endereços salvos. Utiliza TanStack Query para buscar dados da API ou usar dados mock caso o backend esteja offline. Permite a exclusão de itens.
+
+- **src/api.js:**  
+  Configuração do Axios para definir a URL base e cabeçalhos para as requisições HTTP.
+
+- **src/App.jsx:**  
+  Componente raiz que incorpora `AddressForm` e `AddressList`.
+
+- **src/index.js:**  
+  Ponto de entrada da aplicação. Configura o React Query Provider e renderiza o componente `App`.
+
+## Funcionalidades
+
+- **Consulta de CEP:** Ao inserir um CEP válido, os campos de logradouro, bairro, cidade e estado são preenchidos automaticamente usando a API ViaCEP.
+- **Formulário de Dados Pessoais:** Permite inserir nome e CPF junto com os dados do endereço.
+- **Listagem de Endereços:** Exibe uma lista de endereços salvos com opções para exclusão.
+- **Dados Mock:** Se o backend estiver offline, a aplicação utiliza dados mock para exibir exemplos na lista.
+- **Gerenciamento de Estado com TanStack Query:** Simplifica requisições assíncronas, cache e atualização de dados.
+
+## Scripts Disponíveis
+
+No diretório do projeto, você pode executar:
 
 ### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Inicia o servidor de desenvolvimento e abre a aplicação em [http://localhost:3000](http://localhost:3000).
 
 ### `npm run build`
+Cria a versão de produção da aplicação no diretório `build`.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Observações
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- Certifique-se de que o backend esteja em execução e acessível na URL configurada em `REACT_APP_API_URL`. Caso contrário, o componente `AddressList` exibirá dados mock.
+- As atualizações e exclusões usam a API definida no backend. Se estiver offline, apenas a listagem usará dados simulados.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Licença
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Este projeto está licenciado sob a MIT License.
